@@ -1,5 +1,5 @@
 # Reliability
-Library to calculate the reliability of a system network
+Library to calculate the reliability of a system
 
 ## Commands
 Build Javadocs" `./gradlew javadoc`
