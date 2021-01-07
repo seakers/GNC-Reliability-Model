@@ -26,4 +26,7 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+
+    // EFFICIENT JAVA MATRIX LIBRARY
+    compile group: 'org.ejml', name: 'ejml-all', version: '0.40'
 }
