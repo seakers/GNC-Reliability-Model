@@ -3,5 +3,5 @@ package reliability.models;
 
 
 
-public class TwoDimensional {
+public class GNC_Model_1 {
 }

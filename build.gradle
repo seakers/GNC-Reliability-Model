@@ -30,3 +30,9 @@ dependencies {
     // EFFICIENT JAVA MATRIX LIBRARY
     compile group: 'org.ejml', name: 'ejml-all', version: '0.40'
 }
+
+test {
+    useJUnit()
+    testLogging.showStandardStreams = true
+    maxHeapSize = '1G'
+}

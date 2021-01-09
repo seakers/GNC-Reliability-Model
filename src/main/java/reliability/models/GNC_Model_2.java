@@ -6,7 +6,7 @@ import reliability.utils.BitOperations;
 
 import java.util.ArrayList;
 
-public class ThreeDimensional {
+public class GNC_Model_2 {
 
     private ArrayList<Double> sensors;
     private ArrayList<Double> computers;
@@ -172,8 +172,8 @@ public class ThreeDimensional {
             return (new SimpleMatrix(matrix));
         }
 
-        public ThreeDimensional build(){
-            ThreeDimensional model = new ThreeDimensional();
+        public GNC_Model_2 build(){
+            GNC_Model_2 model = new GNC_Model_2();
             model.sensors   = this.sensors;
             model.computers = this.computers;
             model.actuators = this.actuators;
@@ -194,9 +194,17 @@ public class ThreeDimensional {
         }
     }
 
-
-
     public double evaluate_reliability(boolean transform){
+        double reliability = this.full_factorial_reliability_evaluation();
+
+        if(transform){
+            return this.transform_reliability(reliability);
+        }
+        return reliability;
+    }
+
+
+    public double full_factorial_reliability_evaluation(){
         double reliability = 0;
 
         // 1. Iterate over possible sensor failures
@@ -219,7 +227,7 @@ public class ThreeDimensional {
                         for(SimpleMatrix actuator_failure: this.actuator_failures){
                             double prob_actuator_failure = this.component_failure_probability(this.actuators, actuator_failure);
 
-                            boolean system_failed = this.evaluate_system_failure(
+                            boolean system_status = this.evaluate_system_failure(
                                     sensor_failure,
                                     sensor_computer_connection_failure,
                                     computer_failure,
@@ -227,7 +235,16 @@ public class ThreeDimensional {
                                     actuator_failure
                             );
 
-                            if(!system_failed){
+                            if(system_status){
+//                                System.out.println("\n\n--------");
+//                                System.out.println(prob_sensor_failure);
+//                                System.out.println(prob_sensor_computer_connection_failure);
+//                                System.out.println(prob_computer_failure);
+//                                System.out.println(prob_computer_actuator_connection_failure);
+//                                System.out.println(prob_actuator_failure);
+//                                System.out.println("--------\n\n");
+
+
                                 reliability += (prob_sensor_failure*prob_sensor_computer_connection_failure*prob_computer_failure*prob_computer_actuator_connection_failure*prob_actuator_failure);
                             }
                         }
@@ -236,9 +253,6 @@ public class ThreeDimensional {
             }
         }
 
-        if(transform){
-            return this.transform_reliability(reliability);
-        }
         return reliability;
     }
 
@@ -256,10 +270,10 @@ public class ThreeDimensional {
 
         double result = actuator_status.get(0, 0);
         if(result > 0.0){
-            return false;
+            return true;
         }
         else{
-            return true;
+            return false;
         }
     }
 
@@ -302,7 +316,7 @@ public class ThreeDimensional {
 
         for(int x = 0; x < probabilities.size(); x++){
             Double bit = bit_matrix.get(0, x);
-            if(bit.equals(1)){
+            if(bit.equals(1.0)){
                 prob = prob * probabilities.get(x);
             }
             else{
