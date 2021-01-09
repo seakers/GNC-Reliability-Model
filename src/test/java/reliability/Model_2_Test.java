@@ -7,7 +7,9 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-public class ModelTest {
+public class Model_2_Test {
+
+
     @Test public void testModel() {
 
         System.out.println("\n\n\n\n\n\n------ MODEL RELIABILITY TEST -----");
@@ -41,6 +43,7 @@ public class ModelTest {
 
 
 
-        assertTrue("someLibraryMethod should return 'true'", true);
+        assertTrue("this should return true", true);
     }
+
 }
