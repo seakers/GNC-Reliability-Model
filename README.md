@@ -12,7 +12,7 @@ Java library capable of evaluating the mass and reliability of a guidance naviga
 
 ## Models
 
-This library contains two different models, each representing a guidance navigation and control system.
+This library contains two different gnc, each representing a guidance navigation and control system.
 
 
 #### GNC_Model_1

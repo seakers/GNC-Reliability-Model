@@ -1,4 +1,4 @@
-package reliability.models;
+package reliability.evaluation;
 
 
 import org.ejml.simple.SimpleMatrix;
@@ -6,7 +6,7 @@ import reliability.utils.BitOperations;
 
 import java.util.ArrayList;
 
-public class GNC_Model_2 {
+public class Evaluation_Model_2 {
 
     private ArrayList<Double> sensors;
     private ArrayList<Double> computers;
@@ -172,8 +172,8 @@ public class GNC_Model_2 {
             return (new SimpleMatrix(matrix));
         }
 
-        public GNC_Model_2 build(){
-            GNC_Model_2 model = new GNC_Model_2();
+        public Evaluation_Model_2 build(){
+            Evaluation_Model_2 model = new Evaluation_Model_2();
             model.sensors   = this.sensors;
             model.computers = this.computers;
             model.actuators = this.actuators;

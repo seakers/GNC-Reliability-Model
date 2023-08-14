@@ -1,10 +1,9 @@
-package reliability.models;
+package reliability.evaluation;
 
 
 import org.ejml.simple.SimpleMatrix;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * This class evaluates the reliability of network containing only source and sink nodes
@@ -12,7 +11,7 @@ import java.util.HashMap;
 
 
 
-public class GNC_Model_1 {
+public class Evaluation_Model_1 {
 
 
 
@@ -29,7 +28,7 @@ public class GNC_Model_1 {
      * @param source_sink_assignation binary string encoding assignation of sink nodes to source nodes
      */
 
-    public GNC_Model_1(ArrayList<Double> source_probs, ArrayList<Double> sink_probs, String source_sink_assignation){
+    public Evaluation_Model_1(ArrayList<Double> source_probs, ArrayList<Double> sink_probs, String source_sink_assignation){
 
         this.sensors                     = source_probs;
         this.computers                   = sink_probs;

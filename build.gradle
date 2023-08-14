@@ -29,6 +29,12 @@ dependencies {
 
     // EFFICIENT JAVA MATRIX LIBRARY
     compile group: 'org.ejml', name: 'ejml-all', version: '0.40'
+
+    // MOEA
+    compile 'org.moeaframework:moeaframework:2.12'
+
+    // Gson
+    implementation 'com.google.code.gson:gson:2.8.6'
 }
 
 test {
