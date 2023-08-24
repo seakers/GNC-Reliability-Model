@@ -45,8 +45,10 @@ public class GNC_Search implements Callable<Algorithm> {
         Population archive = new Population(((AbstractEvolutionaryAlgorithm)alg).getArchive());
 
         // NFE ITERATIONS
+        int step_count = 0;
         while (!alg.isTerminated() && (alg.getNumberOfEvaluations() < this.max_evaluations) && !isStopped){
-
+            System.out.println("--> ALGORITHM STEP/NFE: " + Integer.toString(step_count) + " | " + Integer.toString(alg.getNumberOfEvaluations()));
+            step_count = step_count + 1;
             if (this.isStopped) {
                 break;
             }
@@ -56,7 +58,7 @@ public class GNC_Search implements Callable<Algorithm> {
 
             // NEW POPULATION
             Population newArchive = ((AbstractEvolutionaryAlgorithm)alg).getArchive();
-            System.out.println("---> Archive size: " + newArchive.size());
+//            System.out.println("---> Archive size: " + newArchive.size());
 
             // NEW DESIGN FUNCTIONALITY
             for (int i = 0; i < newArchive.size(); ++i){
@@ -64,7 +66,7 @@ public class GNC_Search implements Callable<Algorithm> {
                 Solution newSol       = newArchive.get(i);
                 boolean  alreadyThere = archive.contains(newSol);
                 if (!alreadyThere){
-                    System.out.println("---> NEW DESIGN FOUND, NEW HV");
+//                    System.out.println("---> NEW DESIGN FOUND, NEW HV");
 
                     this.analyzer.add("popGNC", this.alg.getResult());
                     // this.pop_counter++;
@@ -102,7 +104,7 @@ public class GNC_Search implements Callable<Algorithm> {
 
 
     public void save_run(){
-        String save_dir = "/app/results/crossover5_hv/";
+        String save_dir = "/app/results/journal/";
         String file_name = "run_"+this.run_number+".csv";
 
         try{

@@ -15,7 +15,7 @@ public class MOEA_Test {
 
 
 
-        int number_runs = 30;
+        int number_runs = 1;
         for(int run = 0; run < number_runs; run++){
             System.gc();
 
@@ -23,8 +23,8 @@ public class MOEA_Test {
 
             this.set_mass_properties(design_space);
 
-            int initial_pop_size = 20;
-            int num_evaluations = 1000;
+            int initial_pop_size = 30;
+            int num_evaluations = 10000;
             double mutation_probability = 0.6; // strongest seems to be 0.6
 
             GNC_GA algorithm = new GNC_GA(design_space, initial_pop_size, num_evaluations, mutation_probability, run);
@@ -58,9 +58,6 @@ public class MOEA_Test {
 
         design_space.set_mass_properties(mass_properties);
     }
-
-
-
 
     public DesignSpace create_design_space(){
 

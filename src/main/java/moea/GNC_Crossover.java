@@ -23,8 +23,8 @@ public class GNC_Crossover implements Variation {
     @Override
     public Solution[] evolve(Solution[] parents){
 
-        System.out.println("\n\n----> GNC CROSSOVER OPERATION: " + parents.length);
-        System.out.println("--> " + parents[0]);
+//        System.out.println("\n\n----> GNC CROSSOVER OPERATION: " + parents.length);
+//        System.out.println("--> " + parents[0]);
 
         // TWO PARENTS FOR CROSSOVER
         Solution parent1 = parents[0].copy();

@@ -3,6 +3,7 @@ package moea;
 import gnc.Design;
 import gnc.DesignSpace;
 import org.moeaframework.algorithm.EpsilonMOEA;
+import org.moeaframework.algorithm.NSGAII;
 import org.moeaframework.core.*;
 import org.moeaframework.core.comparator.ChainedComparator;
 import org.moeaframework.core.comparator.ParetoObjectiveComparator;
@@ -21,6 +22,8 @@ public class GNC_GA implements Runnable{
     public int num_evaluations;
     public List<Solution> solutions;
     public EpsilonMOEA eMOEA;
+
+    public NSGAII NSGA;
     public DesignSpace design_space;
     public int run_number;
 
@@ -53,7 +56,7 @@ public class GNC_GA implements Runnable{
         }
     }
 
-    public void initialize(){
+    public void initialize_MOEA(){
 
         InjectedInitialization initialization = new InjectedInitialization(this.problem, this.solutions.size(), this.solutions);
 
@@ -69,16 +72,35 @@ public class GNC_GA implements Runnable{
         this.eMOEA = new EpsilonMOEA(this.problem, population, archive, selection, crossover, initialization);
     }
 
+    public void initialize_NSGA(){
+
+        InjectedInitialization initialization = new InjectedInitialization(this.problem, this.solutions.size(), this.solutions);
+
+        NondominatedSortingPopulation population = new NondominatedSortingPopulation();
+
+        // Required for NSGAII constructor, but not actually used in the algorithm
+        double[] epsilonDouble = new double[]{0.001, 1};
+        EpsilonBoxDominanceArchive archive       = new EpsilonBoxDominanceArchive(epsilonDouble);
+
+        ChainedComparator comp      = new ChainedComparator(new ParetoObjectiveComparator());
+        TournamentSelection selection = new TournamentSelection(2, comp);
+
+        GNC_Crossover crossover = new GNC_Crossover(this.design_space, this.mutation_probability);
+
+        this.NSGA = new NSGAII(this.problem, population, archive, selection, crossover, initialization);
+    }
+
 
 
     public void run(){
 
-        this.initialize();
+        // this.initialize_MOEA();
+        this.initialize_NSGA();
 
-        // SUBMIT MOEA
+        // SUBMIT
         ExecutorService pool   = Executors.newFixedThreadPool(1);
         CompletionService<Algorithm> ecs    = new ExecutorCompletionService<>(pool);
-        ecs.submit(new GNC_Search(this.eMOEA, this.num_evaluations, this.run_number));
+        ecs.submit(new GNC_Search(this.NSGA, this.num_evaluations, this.run_number));
 
 
         try {

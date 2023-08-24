@@ -44,12 +44,12 @@ public class GNC_Problem extends AbstractProblem {
 
             // EVALUATION
 
-            System.out.println("\n--------------- EVALUATING DESIGN");
+//            System.out.println("\n--------------- EVALUATING DESIGN");
             ArrayList<Double> results = this.evaluate_gnc(gnc_solution.design);
             double reliability = results.get(0);
             double mass = results.get(1);
-            System.out.println("--> RELIABILITY: " + reliability);
-            System.out.println("---------> MASS: " + mass);
+//            System.out.println("--> RELIABILITY: " + reliability);
+//            System.out.println("---------> MASS: " + mass);
 
             // SET OBJECTIVE VALUES
             gnc_solution.setObjective(0, -reliability);
@@ -111,7 +111,7 @@ public class GNC_Problem extends AbstractProblem {
     public void write_designs(){
         try{
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            FileWriter outputfile = new FileWriter("/app/results/design/designs_paper_"+this.run_number+".json");
+            FileWriter outputfile = new FileWriter("/app/results/journal_designs/run_"+this.run_number+".json");
             gson.toJson(this.designs, outputfile);
             outputfile.flush();
             outputfile.close();
